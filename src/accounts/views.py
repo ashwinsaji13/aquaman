@@ -1,23 +1,21 @@
 import hashlib
 
-from django.shortcuts import render
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import password_reset
 from django.shortcuts import HttpResponseRedirect
 
 
 # rest_framework
+from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import SAFE_METHODS, IsAdminUser, IsAuthenticated
 
 # custom imports
-from src.accounts.mails import reset_password
-from .models import *
+from .mails import reset_password
+from .models import Account
 from .serializers import AccountSerializer
-from .permissions import AdminOnlyListPermission
 
 
 # Create your views here.
@@ -188,6 +186,8 @@ class AccountViewSet(viewsets.ModelViewSet):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
 
+    def list(self, request):
+        return super(AccountViewSet, self).list(request)
 
 class UserRegister(APIView):
     """
