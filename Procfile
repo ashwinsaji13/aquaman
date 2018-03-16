@@ -1,0 +1,1 @@
+web gunicorn --python src tass.wsgi
