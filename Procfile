@@ -1,1 +1,1 @@
-web gunicorn --python src tass.wsgi
+web: gunicorn tass.wsgi --log-file -
