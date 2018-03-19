@@ -1,1 +1,1 @@
-web: gunicorn tass.wsgi --log-file -
+web: gunicorn tass.wsgi 
