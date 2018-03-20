@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-# added for heroku, this linked with .env file
-from decouple import config
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,10 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY') # heroku... original SECRET_KEY = 4567fghcvb23456@#$^^VBB
+SECRET_KEY = 'kpp0*tgc+u+)%$4(plp+f((0pp!=zi#_hn(3^*wd4y764fld40'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool) # heroku....original DEBUG = True
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
