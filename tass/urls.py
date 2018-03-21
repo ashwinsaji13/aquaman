@@ -22,7 +22,7 @@ from django.conf import settings
 
 urlpatterns = [
     # admin-interface
-    path('admin/', admin.site.urls) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
+    path('admin/', admin.site.urls)
 
     # rest_framework
     path('', include('src.accounts.urls')),
@@ -30,4 +30,4 @@ urlpatterns = [
 
     # project urls
     #path('account/', include('src.accounts.urls')),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
