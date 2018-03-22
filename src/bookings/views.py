@@ -19,15 +19,22 @@ class BookingsView(viewsets.ModelViewSet):
     serializer_class = BookingsSerializer
 
     def create(self, request, *args, **kwargs):
+        # print(request)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
+        print(request.user.is_admin)
         return Response({
             'success': True,
             'status': status.HTTP_201_CREATED,
             'data': serializer.data
         })
+
+    def list(self, request):
+        if not request.user.is_admin:
+            self.queryset = self.queryset.filter(user=request.user)
+        return super(BookingsView, self).list(request)
 
     # def partial_update(self, request, *args, **kwargs):
     #     kwargs['partial'] = True
