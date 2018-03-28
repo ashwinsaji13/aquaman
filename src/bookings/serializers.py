@@ -13,3 +13,13 @@ class BookingsSerializer(serializers.ModelSerializer):
         fields = '__all__'
         # exclude = ('user',)
 
+
+class BookingsUploadSerializer(serializers.Serializer):
+
+    File = serializers.FileField(required=True)
+
+    class Meta:
+        fields = ['Bookings_file']
+
+
+
