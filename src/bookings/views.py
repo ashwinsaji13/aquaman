@@ -27,14 +27,18 @@ class BookingsView(viewsets.ModelViewSet):
         return super(BookingsView, self).list(request)
 
     def create(self, request, *args, **kwargs):
-        # print(request)
-        serializer = self.get_serializer(data=request.data)
+        print("inside create")
+        for data in request.data:
+                data['user'] = request.user.id
+                print(request.data)
+        serializer = self.get_serializer(data=request.data, many=True)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        # headers = self.get_success_headers(serializer.data)
+        headers = self.get_success_headers(serializer.data)
         return Response({
             'success': True,
-            'data': serializer.data
+            'data': serializer.data,
+            'headers': headers
         })
 
     def update(self, request, *args, **kwargs):
@@ -60,9 +64,10 @@ class BookingsUploadView(viewsets.ViewSet):
     # @staticmethod
     def create(self, request):
         # print(request.Files['BookingsUploadSerializer'])
-        # print(request.data)
+        print()
+        print(request.data)
         try:
-            df = pd.read_csv(request.data['File'])  # it will be a csv file
+            df = pd.read_csv(request.data['bookings_file'])  # it will be a csv file
             df = df.fillna('')
 
             msg = "upload-booking"

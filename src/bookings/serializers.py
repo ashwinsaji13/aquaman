@@ -10,16 +10,16 @@ class BookingsSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Booking
-        fields = '__all__'
+        fields = [f.name for f in model._meta.fields]
         # exclude = ('user',)
 
 
 class BookingsUploadSerializer(serializers.Serializer):
 
-    File = serializers.FileField(required=True)
+    bookings_file = serializers.FileField(required=True)
 
     class Meta:
-        fields = ['Bookings_file']
+        fields = ['bookings_file']
 
 
 
