@@ -9,9 +9,9 @@ class Booking(models.Model):
     """
     Bookings Model for container booking
     """
-    MOVE_TYPE = Choices('CY',)
-    FREIGHT = Choices('Prepaid', 'Collect')
-    DISCHARGE_TYPE = Choices('FCL',)
+    # MOVE_TYPE = Choices('CY',)
+    # FREIGHT = Choices('Prepaid', 'Collect')
+    # DISCHARGE_TYPE = Choices('FCL',)
 
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     booking_no = models.IntegerField()
@@ -27,9 +27,12 @@ class Booking(models.Model):
     no_of_cartons = models.IntegerField(null=True, blank=True)
     package_type = models.CharField(max_length=64, null=True, blank=True)
     hscode = models.IntegerField(null=True, blank=True)
-    move_type = StatusField(choices_name='MOVE_TYPE', default=MOVE_TYPE.CY)
-    freight = StatusField(choices_name='FREIGHT', default=FREIGHT.Prepaid)
-    discharge_type = StatusField(choices_name='DISCHARGE_TYPE', default=DISCHARGE_TYPE.FCL)
+    # move_type = StatusField(choices_name='MOVE_TYPE', default=MOVE_TYPE.CY)
+    # freight = StatusField(choices_name='FREIGHT', default=FREIGHT.Prepaid)
+    # discharge_type = StatusField(choices_name='DISCHARGE_TYPE', default=DISCHARGE_TYPE.FCL)
+    move_type = models.CharField(max_length=32, null=True, blank=True)
+    freight = models.CharField(max_length=32, null=True, blank=True)
+    discharge_type = models.CharField(max_length=32, null=True, blank=True)
     # SHIPPER
     shipper_addr = models.CharField(max_length=256, null=True, blank=True)
     shipper_country = models.CharField(max_length=256, null=True, blank=True)
