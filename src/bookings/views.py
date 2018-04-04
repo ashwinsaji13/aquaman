@@ -34,11 +34,9 @@ class BookingsView(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data, many=True)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
         return Response({
             'success': True,
-            'data': serializer.data,
-            'headers': headers
+            'data': serializer.data
         })
 
     def update(self, request, *args, **kwargs):
@@ -48,7 +46,8 @@ class BookingsView(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response({
-            'success': True
+            'success': True,
+            'msg': 'Field successfully updated'
         })
     # def partial_update(self, request, *args, **kwargs):
     #     kwargs['partial'] = True
