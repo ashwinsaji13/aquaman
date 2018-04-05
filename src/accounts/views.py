@@ -1,5 +1,6 @@
 import hashlib
 
+from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import password_reset
 from django.shortcuts import HttpResponseRedirect
@@ -188,6 +189,7 @@ class AccountViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         return super(AccountViewSet, self).list(request)
+
 
 class UserRegister(APIView):
     """

@@ -1,13 +1,14 @@
 import threading
 import hashlib
 from django.core.mail import EmailMultiAlternatives
+from email.mime.text import MIMEText
+from django.conf import settings
 
 # custom imports
 from .models import Account
 
-
-LINK = 'http://139.59.72.184/'
-DEMO_MANAGER = 'manager.vja@gmail.com'
+LINK = 'http://192.168.10.67:3000/'
+DEMO_MANAGER = 'manager.tass@gmail.com'
 
 
 def send_simple_message(subject, body, from_mail, recipient_list, html=None):
@@ -56,13 +57,12 @@ def reset_password(email):
     Method for sending email for resetting the password
     """
     subject = 'Password Reset-TASS'
-    email = email.encode('utf-8')
+    encoded_email = email.encode('utf-8')
     key = settings.SECRET_KEY.encode('utf-8')
-    hash_object = hashlib.sha512(email+key)
+    hash_object = hashlib.sha512(encoded_email + key)
     key = hash_object.hexdigest()
     account_id = Account.objects.get(email=email).id
-    link = ''.join([LINK, 'reset_password/', str(account_id), '/', key])
-
+    link = ''.join([LINK, 'resetPassword/', str(account_id), '/', key])
     message = 'Reset Link'
     html = '''<p>Please click on the <strong>link</strong> below to reset your password for VJA.</p>
         <br>Reset link : <a href="{0}">{0}</a>'''.format(link)
