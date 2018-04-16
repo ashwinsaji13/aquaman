@@ -7,7 +7,7 @@ from django.conf import settings
 # custom imports
 from .models import Account
 
-LINK = 'http://192.168.10.67:3000/'
+LINK = 'http://139.59.94.193:5006/'
 DEMO_MANAGER = 'manager.tass@gmail.com'
 
 
@@ -64,10 +64,11 @@ def reset_password(email):
     account_id = Account.objects.get(email=email).id
     link = ''.join([LINK, 'resetPassword/', str(account_id), '/', key])
     message = 'Reset Link'
-    html = '''<p>Please click on the <strong>link</strong> below to reset your password for VJA.</p>
+    html = '''<p>Please click on the <strong>link</strong> below to reset your password for TASS-Logistics Web Portal.</p>
         <br>Reset link : <a href="{0}">{0}</a>'''.format(link)
     from_mail = DEMO_MANAGER
     mail_list = [email]
 
     thread_mail(subject, message, from_mail, mail_list, fail_silently=False,
                 html=html)
+
