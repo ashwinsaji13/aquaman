@@ -1,7 +1,9 @@
 import pandas as pd
+from django.db.models import Q
 from django.shortcuts import render
 
 # rest-framework
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework import viewsets
@@ -11,32 +13,58 @@ from rest_framework.parsers import FileUploadParser
 # custom imports
 from .serializers import BookingsSerializer, BookingsUploadSerializer
 from .models import Booking
+from .pagination import YourPagination
 
 
 class BookingsView(viewsets.ModelViewSet):
     """
     for booking a shipment by a customer
     """
-    # permission_classes = []
+    # permission_classes = (IsAuthenticated, )
     queryset = Booking.objects.all()
     serializer_class = BookingsSerializer
+    # pagination_class = YourPagination
+
+    # def get_queryset(self, request):
+    #     edit = self.request.is_edit
+    #     print(edit)
+        # if edit == "True":
+        #     return self.queryset.filter(is_edit=edit)
+        # else:
+        #     return self.queryset.filter(is_edit=edit)
 
     def list(self, request):
         if not request.user.is_admin:
-            self.queryset = self.queryset.filter(user=request.user)
+            if request.GET.get('is_edit'):
+                edit = request.GET.get('is_edit', None)
+                self.queryset = self.queryset.filter(user=request.user, is_edit=edit)
         return super(BookingsView, self).list(request)
 
     def create(self, request, *args, **kwargs):
-        print("inside create")
-        for data in request.data:
-                data['user'] = request.user.id
-                print(request.data)
-        serializer = self.get_serializer(data=request.data, many=True)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
+        msg = ""
+        success = ""
+        data = ""
+        try:
+            for data in request.data:
+                    if data['booking_no'] in [None, ""]:
+                        msg = "please enter booking no"
+                        success = False
+                        data = ""
+                    else:
+                        data['user'] = request.user.id
+                        success = True
+                        serializer = self.get_serializer(data=request.data, many=True)
+                        serializer.is_valid(raise_exception=True)
+                        self.perform_create(serializer)
+                        data = serializer.data
+                        msg = "SUCCESSFULLY CREATED"
+        except Exception as e:
+            msg = str(e)
+
         return Response({
-            'success': True,
-            'data': serializer.data
+            'success': success,
+            'data': data,
+            'msg': msg
         })
 
     def update(self, request, *args, **kwargs):
