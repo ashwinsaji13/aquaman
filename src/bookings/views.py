@@ -13,7 +13,7 @@ from rest_framework.parsers import FileUploadParser
 # custom imports
 from .serializers import BookingsSerializer, BookingsUploadSerializer
 from .models import Booking
-from .pagination import YourPagination
+
 
 
 class BookingsView(viewsets.ModelViewSet):
@@ -23,7 +23,6 @@ class BookingsView(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated, )
     queryset = Booking.objects.all()
     serializer_class = BookingsSerializer
-    # pagination_class = YourPagination
 
     # def get_queryset(self, request):
     #     edit = self.request.is_edit
@@ -36,7 +35,8 @@ class BookingsView(viewsets.ModelViewSet):
     def list(self, request):
         if not request.user.is_admin:
             if request.GET.get('is_edit'):
-                edit = request.GET.get('is_edit', None)
+                # edit = request.GET.get('is_edit', None)
+                edit = request.GET['i']
                 self.queryset = self.queryset.filter(user=request.user, is_edit=edit)
         return super(BookingsView, self).list(request)
 
