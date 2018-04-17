@@ -35,8 +35,8 @@ class BookingsView(viewsets.ModelViewSet):
     def list(self, request):
         if not request.user.is_admin:
             if request.GET.get('is_edit'):
-                # edit = request.GET.get('is_edit', None)
-                edit = request.GET['i']
+                edit = request.GET.get('is_edit', None)
+                # edit = request.GET['i']
                 self.queryset = self.queryset.filter(user=request.user, is_edit=edit)
         return super(BookingsView, self).list(request)
 
