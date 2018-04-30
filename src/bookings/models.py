@@ -13,20 +13,29 @@ class Booking(models.Model):
     # FREIGHT = Choices('Prepaid', 'Collect')
     # DISCHARGE_TYPE = Choices('FCL',)
 
-    user = models.ForeignKey(Account, on_delete=models.CASCADE)
-    booking_no = models.IntegerField()
-    container_no = models.CharField(max_length=32, null=True, blank=True)
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, blank=True)
+    booking_no = models.IntegerField(null=True, blank=True)
+    # container_no = models.CharField(max_length=32, null=True, blank=True)
     vessel_name = models.CharField(max_length=32, null=True, blank=True)
     pod = models.CharField(max_length=32, null=True, blank=True)
     pol = models.CharField(max_length=32, null=True, blank=True)
     shipping_bill_no = models.CharField(max_length=32, null=True, blank=True)
-    shipment_desc = models.CharField(max_length=128, null=True, blank=True)
+    shipment_desc = models.TextField(null=True, blank=True)
     seal_no = models.CharField(max_length=32, null=True, blank=True)
-    gross_weight = models.CharField(max_length=64, null=True, blank=True)
-    net_weight = models.CharField(max_length=64, null=True, blank=True)
-    no_of_cartons = models.IntegerField(null=True, blank=True)
-    package_type = models.CharField(max_length=64, null=True, blank=True)
+    # VOYAGE
+    voyage = models.CharField(max_length=64, null=True, blank=True)
+    # FINAL DESTINATION
+    final_dest = models.CharField(max_length=64, null=True, blank=True)
+    # PLACE OF RECEIPT
+    p_o_r = models.CharField(max_length=64, null=True, blank=True)
+    # package_type = models.CharField(max_length=64, null=True, blank=True)
     hscode = models.IntegerField(null=True, blank=True)
+    # GST
+    gst = models.CharField(max_length=32, null=True, blank=True)
+    # IMPORT/EXPORT CODE
+    iec = models.CharField(max_length=64, null=True, blank=True)
+    #  EMAIL ID
+    email_id = models.EmailField(null=True, blank=True)
     # move_type = StatusField(choices_name='MOVE_TYPE', default=MOVE_TYPE.CY)
     # freight = StatusField(choices_name='FREIGHT', default=FREIGHT.Prepaid)
     # discharge_type = StatusField(choices_name='DISCHARGE_TYPE', default=DISCHARGE_TYPE.FCL)
@@ -61,4 +70,23 @@ class Booking(models.Model):
 
     def __str__(self):
         return "Booking-No:{0}".format(self.booking_no)
+
+    # @property
+    # def is_edit(self):
+    #     return self.is_edit
+
+
+class Container(models.Model):
+    booking = models.ForeignKey(Booking, related_name="container_booking", on_delete=models.CASCADE)
+    container_no = models.CharField(max_length=32, null=True, blank=True)
+    gross_weight = models.CharField(max_length=64, null=True, blank=True)
+    net_weight = models.CharField(max_length=64, null=True, blank=True)
+    no_of_cartons = models.IntegerField(null=True, blank=True)
+    package_type = models.CharField(max_length=64, null=True, blank=True)
+
+    class Meta:
+        ordering = ('id',)
+
+    def __str__(self):
+        return self.container_no
 

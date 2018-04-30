@@ -11,9 +11,8 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework.parsers import FileUploadParser
 # custom imports
-from .serializers import BookingsSerializer, BookingsUploadSerializer
-from .models import Booking
-
+from .serializers import BookingsSerializer, BookingsUploadSerializer, ContainerSerializer
+from .models import Booking, Container
 
 
 class BookingsView(viewsets.ModelViewSet):
@@ -25,7 +24,8 @@ class BookingsView(viewsets.ModelViewSet):
     serializer_class = BookingsSerializer
 
     # def get_queryset(self, request):
-    #     edit = self.request.is_edit
+    #     edit = self.re
+    # quest.is_edit
     #     print(edit)
         # if edit == "True":
         #     return self.queryset.filter(is_edit=edit)
@@ -34,38 +34,77 @@ class BookingsView(viewsets.ModelViewSet):
 
     def list(self, request):
         if not request.user.is_admin:
+            # print(request.user.is_admin)
             if request.GET.get('is_edit'):
                 edit = request.GET.get('is_edit', None)
-                # edit = request.GET['i']
                 self.queryset = self.queryset.filter(user=request.user, is_edit=edit)
+                # self.queryset = self.queryset.filter(Q(user=request.user) |
+                #                                      Q(is_edit=edit))
+            else:
+                self.queryset = self.queryset.filter(user=request.user)
+
         return super(BookingsView, self).list(request)
 
     def create(self, request, *args, **kwargs):
+        """
+        bookings should be a list of dict
+        """
         msg = ""
         success = ""
         data = ""
+        d = []
         try:
             for data in request.data:
-                    if data['booking_no'] in [None, ""]:
-                        msg = "please enter booking no"
-                        success = False
-                        data = ""
-                    else:
-                        data['user'] = request.user.id
-                        success = True
-                        serializer = self.get_serializer(data=request.data, many=True)
-                        serializer.is_valid(raise_exception=True)
-                        self.perform_create(serializer)
-                        data = serializer.data
-                        msg = "SUCCESSFULLY CREATED"
-        except Exception as e:
-            msg = str(e)
+                if data['booking_no'] in [None, ""]:
+                    msg = "please enter booking no"
+                    success = False
+                    data = ""
+                    r = {
+                        'data': data,
+                        'msg': msg,
+                        'success': success
+                    }
+                    d.append(r)
+                else:
+                    data['user'] = request.user.id
+                    success = True
+                    serializer = self.get_serializer(data=data)
+                    serializer.is_valid(raise_exception=True)
+                    self.perform_create(serializer)
+                    data = serializer.data
+                    # d.append(data)
+                    # print(data)
+                    msg = "SUCCESSFULLY CREATED"
+                    r = {
+                        'data': data,
+                        'msg': msg,
+                        'success': success
+                    }
+                    d.append(r)
 
+        except Exception as e:
+            msg = "exception:", e
+            return Response({
+                'msg': msg
+            })
         return Response({
-            'success': success,
-            'data': data,
-            'msg': msg
+            'data': d
         })
+
+        # return Response({
+        #     'success': success,
+        #     'msg': msg,
+        #     'data': data
+        # })
+        """
+        the below code also works
+        """
+        # for data in request.data:
+        #     data['user'] = request.user.id
+        # serializer = self.get_serializer(data=request.data, many=True)
+        # serializer.is_valid(raise_exception=True)
+        # self.perform_create(serializer)
+        # return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
@@ -77,9 +116,30 @@ class BookingsView(viewsets.ModelViewSet):
             'success': True,
             'msg': 'Field successfully updated'
         })
-    # def partial_update(self, request, *args, **kwargs):
-    #     kwargs['partial'] = True
-    #     return self.update(request, *args, **kwargs)
+
+
+class ContainersView(viewsets.ModelViewSet):
+    queryset = Container.objects.all()
+    serializer_class = ContainerSerializer
+
+    def create(self, request, *args, **kwargs):
+        """
+        containers is a list of dict
+        """
+        msg = ""
+        try:
+            serializer = self.get_serializer(data=request.data, many=True)
+            serializer.is_valid(raise_exception=True)
+            self.perform_create(serializer)
+            msg = "SUCCESS"
+        except Exception as e:
+            msg = "EXCEPTION"
+
+        return Response({
+            'data': serializer.data,
+            'success': True,
+            'msg': msg
+        })
 
 
 class BookingsUploadView(viewsets.ViewSet):
