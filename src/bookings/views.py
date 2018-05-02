@@ -59,12 +59,12 @@ class BookingsView(viewsets.ModelViewSet):
                     msg = "please enter booking no"
                     success = False
                     data = ""
-                    r = {
+                    return Response({
                         'data': data,
                         'msg': msg,
                         'success': success
-                    }
-                    d.append(r)
+                    })
+                    # d.append(r)
                 else:
                     data['user'] = request.user.id
                     success = True
@@ -72,15 +72,14 @@ class BookingsView(viewsets.ModelViewSet):
                     serializer.is_valid(raise_exception=True)
                     self.perform_create(serializer)
                     data = serializer.data
-                    # d.append(data)
+                    d.append(data)
                     # print(data)
                     msg = "SUCCESSFULLY CREATED"
-                    r = {
-                        'data': data,
-                        'msg': msg,
-                        'success': success
-                    }
-                    d.append(r)
+                    # return Response({
+                    #     'data': data,
+                    #     'msg': msg,
+                    #     'success': success
+                    # })
 
         except Exception as e:
             msg = "exception:", e
@@ -88,7 +87,9 @@ class BookingsView(viewsets.ModelViewSet):
                 'msg': msg
             })
         return Response({
-            'data': d
+            'data': d,
+            'success': success,
+            'msg': msg,
         })
 
         # return Response({
