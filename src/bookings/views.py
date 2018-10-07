@@ -160,6 +160,7 @@ class BookingsUploadView(viewsets.ViewSet):
             df = pd.read_csv(request.data['bookings_file'])  # it will be a csv file
             df = df.fillna('')
             df_columns = df.columns
+            df_merge = pd.merge(df, df)
 
             msg = "upload-booking"
             for index, value in df.iterrows():
