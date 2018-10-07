@@ -51,8 +51,9 @@ class Account(AbstractBaseUser):
         def __str__(self):
             return self.email
 
+        @property
         def get_full_name(self):
-            return self.email
+            return self.get_full_name
 
         def get_short_name(self):
             return self.email

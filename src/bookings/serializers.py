@@ -45,6 +45,13 @@ class BookingsUploadSerializer(serializers.Serializer):
         fields = ['bookings_file']
 
 
+class TrialPageSerializer(serializers.Serializer):
+
+    trial_file = serializers.FileField(required=True)
+
+    class Meta:
+        fields = ['trial_file']
+
 
 
 

@@ -11,7 +11,9 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework.parsers import FileUploadParser
 # custom imports
-from .serializers import BookingsSerializer, BookingsUploadSerializer, ContainerSerializer
+from .serializers import(
+    BookingsSerializer, BookingsUploadSerializer, ContainerSerializer, TrialPageSerializer
+)
 from .models import Booking, Container
 
 
@@ -157,6 +159,7 @@ class BookingsUploadView(viewsets.ViewSet):
         try:
             df = pd.read_csv(request.data['bookings_file'])  # it will be a csv file
             df = df.fillna('')
+            df_columns = df.columns
 
             msg = "upload-booking"
             for index, value in df.iterrows():
@@ -325,7 +328,16 @@ class BookingsUploadView(viewsets.ViewSet):
             })
 
 
+class TrialPageViewSet(viewsets.ViewSet):
+    serializer_class = TrialPageSerializer
+    imagess = serializer.Ima
 
-
+    def create(self, request):
+        try:
+            trial = request.data['trial_file']
+            print("hellllllloooooooo", trial)
+            return Response("file uploaded")
+        except Exception as e:
+            return Response("this is the error--->" + str(e))
 
 

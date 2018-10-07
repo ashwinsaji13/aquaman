@@ -5,7 +5,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import password_reset
 from django.shortcuts import HttpResponseRedirect
 
-
 # rest_framework
 from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
@@ -44,6 +43,7 @@ class Login(APIView):
         msg = "Error while logging in"
         token = None
         user = user_id = None
+        name = ""
         try:
             email = request.data['email'].strip().lower()
             password = request.data['password'].strip()
@@ -54,6 +54,7 @@ class Login(APIView):
                 user_id = tok.user_id
                 token = tok.key
                 msg = "User Authenticated"
+                name = user.full_name
             else:
                 msg = "Error in User Credentials Provided."
             # superu = Account.objects.get(email=email)
@@ -64,6 +65,7 @@ class Login(APIView):
             'msg': msg,
             'success': success,
             'token': token,
+            'name': name,
             'user': user_id,
             'admin': user.admin if user else None,
             'initial_login': user.initial_login if user else False
@@ -128,7 +130,7 @@ class ResetPassword(APIView):
             account = Account.objects.get(pk=pk)
             email = account.email.encode('utf-8')
             secret_key = settings.SECRET_KEY.encode('utf-8')
-            hash_key = hashlib.sha512(email+secret_key).hexdigest()
+            hash_key = hashlib.sha512(email + secret_key).hexdigest()
             if hash_key == key:
                 account.set_password(new_password)
                 account.save()
@@ -150,7 +152,7 @@ class ChangePasswordView(APIView):
     """
     View for requesting a password change from the logged in account.
     """
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
         """
@@ -175,7 +177,7 @@ class ChangePasswordView(APIView):
         return Response({
             'success': success,
             'msg': msg,
-            })
+        })
 
 
 class AccountViewSet(viewsets.ModelViewSet):
@@ -207,8 +209,8 @@ class UserRegister(APIView):
             full_name = request.data['full_name']
             phone_number = request.data['phone_number']
 
-            user = Account.objects.create_user(email=email, password=password, full_name=full_name,\
-                                            phone_number=phone_number, staff=True)
+            user = Account.objects.create_user(email=email, password=password, full_name=full_name, \
+                                               phone_number=phone_number, staff=True)
             if user:
                 success = 'true'
                 msg = 'User Created'
@@ -216,11 +218,9 @@ class UserRegister(APIView):
             else:
                 msg = 'User has not been created.Please register again!!!!'
 
-        except Exception as e:
-                msg = str(e)
-
+        except:
+            msg = "The user is already registered. Please sign in from the Login page"
         return Response({
             'msg': msg,
             'success': success
         })
-

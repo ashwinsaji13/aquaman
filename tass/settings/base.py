@@ -145,16 +145,24 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'DEFAULT_PAGINATION_CLASS': 'src.bookings.pagination.YourPagination',
     'PAGE_SIZE': 10
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
 
 # settings to send email
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# SERVER_EMAIL = 'logging@rawdatatech.com'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'logging@rawdatatech.com'
+# EMAIL_HOST_PASSWORD = 'Abcd123#$'
+# EMAIL_USE_TLS = True
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-SERVER_EMAIL = 'logging@rawdatatech.com'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'logging@rawdatatech.com'
-EMAIL_HOST_PASSWORD = 'Abcd123#$'
+EMAIL_HOST_USER = 'sendgrid_gilfoyle17'
+EMAIL_HOST_PASSWORD = 'sendgrid_dineshisa1oser'
 EMAIL_USE_TLS = True
