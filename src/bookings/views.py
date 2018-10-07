@@ -159,6 +159,7 @@ class BookingsUploadView(viewsets.ViewSet):
         try:
             df = pd.read_csv(request.data['bookings_file'])  # it will be a csv file
             df = df.fillna('')
+            df_columns = df.columns
 
             msg = "upload-booking"
             for index, value in df.iterrows():

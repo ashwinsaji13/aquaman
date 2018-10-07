@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d502f3ea-9e0b-4253-950b-390de834b684" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/tass.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tass.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements/production.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements/production.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/accounts/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/accounts/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/accounts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bookings/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bookings/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bookings/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bookings/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bookings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/bookings/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tass/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/tass/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tass/settings/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tass/settings/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tass/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/tass/settings/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tass/settings/production.py" beforeDir="false" afterPath="$PROJECT_DIR$/tass/settings/production.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tass/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tass/urls.py" afterDir="false" />
-    </list>
+    <list default="true" id="d502f3ea-9e0b-4253-950b-390de834b684" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,21 +33,22 @@
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.16" value="2" />
           <entry key="project.open.time.18" value="2" />
+          <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="5" />
+          <entry key="py" value="6" />
           <entry key="vmoptions" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="5" />
+          <entry key="Python" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -116,11 +101,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tass/settings/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1865">
+            <state relative-caret-position="566">
               <caret line="144" column="53" selection-start-line="144" selection-start-column="53" selection-end-line="144" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/bookings/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3141">
+              <caret line="331" column="28" selection-start-line="331" selection-start-column="28" selection-end-line="331" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -212,7 +206,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -257,6 +250,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -297,9 +291,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-11" width="1368" height="780" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49837664" visible="true" weight="0.260574" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49837664" visible="true" weight="0.26435044" />
       <window_info id="Structure" order="1" sideWeight="0.5016234" side_tool="true" weight="0.22121212" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -312,7 +305,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5037879" side_tool="true" weight="0.85227275" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49621212" weight="0.90584415" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49621212" visible="true" weight="0.80153847" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.32792208" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -605,13 +598,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bookings/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5670">
-          <caret line="331" column="28" selection-start-line="331" selection-start-column="28" selection-end-line="331" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/manage.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -652,8 +638,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tass/settings/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1865">
+        <state relative-caret-position="566">
           <caret line="144" column="53" selection-start-line="144" selection-start-column="53" selection-end-line="144" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bookings/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3141">
+          <caret line="331" column="28" selection-start-line="331" selection-start-column="28" selection-end-line="331" selection-end-column="28" />
         </state>
       </provider>
     </entry>
